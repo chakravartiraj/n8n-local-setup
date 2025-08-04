@@ -1,0 +1,18 @@
+# Environment variables
+.env.local
+.env.*.local
+
+# N8N data (if using local volume mounts)
+n8n_data/
+.n8n/
+
+# Docker
+docker-compose.override.yml
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
