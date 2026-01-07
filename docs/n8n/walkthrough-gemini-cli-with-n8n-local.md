@@ -24,6 +24,15 @@ For n8n to connect to your Mac, you must enable SSH access.
 3.  Click **"Add workflow"** -> **"Import from..."** -> **"File"**.
 4.  Select the file: `n8n_gemini_cli_workflow.json` (located in your project folder).
 
+### Alternative Method (Copy & Paste)
+If the file import fails:
+1.  Open `n8n_gemini_cli_workflow.json` in a text editor.
+2.  **Copy** the entire content.
+3.  Go to the n8n Canvas (in your browser).
+4.  Press **Cmd+V** (Mac) or **Ctrl+V** to paste.
+5.  The nodes should appear on your canvas.
+
+
 ## Step 3: Configure SSH Credentials
 
 The imported workflow has a placeholder for SSH credentials. You need to configure them.
