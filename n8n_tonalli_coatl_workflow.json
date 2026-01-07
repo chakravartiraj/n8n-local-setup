@@ -1,0 +1,317 @@
+{
+  "name": "Tonalli Coatl - Production Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "start-trigger",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        20,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/docs/0. PROMPT_TEMPLATE.md\""
+      },
+      "id": "read-template",
+      "name": "Read Master Template",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/1. THE_ARCHIVIST.md\""
+      },
+      "id": "read-archivist",
+      "name": "Read Archivist Rule",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Archivist. Keeper of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = $(\"read-template\").first().json.stdout}} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Execute your directive based on the provided Master Template.' --output-format json",
+        "cwd": "/Users/administrator/gemini-n8n-execution"
+      },
+      "id": "agent-archivist",
+      "name": "Step 1: The Archivist",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        680,
+        300
+      ],
+      "credentials": {
+        "ssh": {
+          "id": "YOUR_SSH_CREDENTIAL_ID",
+          "name": "Local Mac SSH"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/2. THE_GHOSTWRITER.md\""
+      },
+      "id": "read-ghostwriter",
+      "name": "Read Ghostwriter Rule",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Ghostwriter. Master storyteller.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = $(\"read-template\").first().json.stdout}} \n\n INPUT DIRECTIVE: {{ $(\"agent-archivist\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Write the script following your agent rules.' --output-format json",
+        "cwd": "/Users/administrator/gemini-n8n-execution"
+      },
+      "id": "agent-ghostwriter",
+      "name": "Step 2: The Ghostwriter",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        300
+      ],
+      "credentials": {
+        "ssh": {
+          "id": "YOUR_SSH_CREDENTIAL_ID",
+          "name": "Local Mac SSH"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/3. THE_VISIONARY.md\""
+      },
+      "id": "read-visionary",
+      "name": "Read Visionary Rule",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Visionary. Artist of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"agent-ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"agent-archivist\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create visual prompts for the script.' --output-format json",
+        "cwd": "/Users/administrator/gemini-n8n-execution"
+      },
+      "id": "agent-visionary",
+      "name": "Step 3: The Visionary",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        300
+      ],
+      "credentials": {
+        "ssh": {
+          "id": "YOUR_SSH_CREDENTIAL_ID",
+          "name": "Local Mac SSH"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/4. THE_VOICE.md\""
+      },
+      "id": "read-voice",
+      "name": "Read Voice Rule",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Voice. Professor of the Ancient.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"agent-ghostwriter\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create the TTS script with phonetic guides.' --output-format json",
+        "cwd": "/Users/administrator/gemini-n8n-execution"
+      },
+      "id": "agent-voice",
+      "name": "Step 4: The Voice",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        2000,
+        300
+      ],
+      "credentials": {
+        "ssh": {
+          "id": "YOUR_SSH_CREDENTIAL_ID",
+          "name": "Local Mac SSH"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/5. THE_BROADCASTER.md\""
+      },
+      "id": "read-broadcaster",
+      "name": "Read Broadcaster Rule",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        2220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Broadcaster. Metadata expert.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"agent-ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"agent-archivist\").first().json.response }} \n\n CONTEXT: {{$script = $(\"read-template\").first().json.stdout}} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create the publishing package.' --output-format json",
+        "cwd": "/Users/administrator/gemini-n8n-execution"
+      },
+      "id": "agent-broadcaster",
+      "name": "Step 5: The Broadcaster",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        2440,
+        300
+      ],
+      "credentials": {
+        "ssh": {
+          "id": "YOUR_SSH_CREDENTIAL_ID",
+          "name": "Local Mac SSH"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Read Master Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Master Template": {
+      "main": [
+        [
+          {
+            "node": "Read Archivist Rule",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Archivist Rule": {
+      "main": [
+        [
+          {
+            "node": "Step 1: The Archivist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 1: The Archivist": {
+      "main": [
+        [
+          {
+            "node": "Read Ghostwriter Rule",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Ghostwriter Rule": {
+      "main": [
+        [
+          {
+            "node": "Step 2: The Ghostwriter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 2: The Ghostwriter": {
+      "main": [
+        [
+          {
+            "node": "Read Visionary Rule",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Visionary Rule": {
+      "main": [
+        [
+          {
+            "node": "Step 3: The Visionary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 3: The Visionary": {
+      "main": [
+        [
+          {
+            "node": "Read Voice Rule",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Voice Rule": {
+      "main": [
+        [
+          {
+            "node": "Step 4: The Voice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 4: The Voice": {
+      "main": [
+        [
+          {
+            "node": "Read Broadcaster Rule",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Broadcaster Rule": {
+      "main": [
+        [
+          {
+            "node": "Step 5: The Broadcaster",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
