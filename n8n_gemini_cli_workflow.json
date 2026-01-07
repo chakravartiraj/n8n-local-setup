@@ -1,0 +1,96 @@
+{
+  "name": "Gemini CLI Integration (SSH)",
+  "nodes": [
+    {
+      "parameters": {
+        "command": "/Users/administrator/.npm-global/bin/gemini \"{{$json.prompt}}\"",
+        "cwd": "/Users/administrator"
+      },
+      "id": "e6f8c7b4-1a2d-4e5f-9c8b-3d4a5e6f7g8h",
+      "name": "Execute Gemini CLI",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        460,
+        300
+      ],
+      "credentials": {
+        "ssh": {
+          "id": "YOUR_SSH_CREDENTIAL_ID",
+          "name": "Local Mac SSH"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Gemini CLI Integration\nThis workflow demonstrates how to run the locally installed `@google/gemini-cli` from n8n using SSH.\n\n**Prerequisites:**\n1. Enable 'Remote Login' on your Mac.\n2. Configure SSH credentials in n8n connecting to `host.docker.internal`.\n3. Ensure `gemini` is installed on the host.\n",
+        "height": 232,
+        "width": 366
+      },
+      "id": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "name": "Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        180,
+        200
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+      "name": "On Manual Execution",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "prompt",
+              "value": "Hello from n8n! Tell me a joke."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
+      "name": "Set Prompt",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        340,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "On Manual Execution": {
+      "main": [
+        [
+          {
+            "node": "Set Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Prompt": {
+      "main": [
+        [
+          {
+            "node": "Execute Gemini CLI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
