@@ -4,7 +4,7 @@
     {
       "parameters": {
         "command": "export PATH=$PATH:/usr/local/bin && echo \"\" | /Users/administrator/.npm-global/bin/gemini -p \"{{$json.prompt}}\" --output-format json",
-        "cwd": "/Users/administrator/Documents/Live Projects/n8n-local-setup"
+        "cwd": "/Users/administrator/gemini-n8n-execution"
       },
     "id": "e6f8c7b4-1a2d-4e5f-9c8b-3d4a5e6f7g8h",
       "name": "Execute Gemini CLI",
