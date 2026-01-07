@@ -14,45 +14,33 @@
     },
     {
       "parameters": {
-        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/docs/0. PROMPT_TEMPLATE.md\""
+        "fileSelector": "/home/node/Documents/Live Projects/stcejorp_ty/tonalli_coatl/docs/0. PROMPT_TEMPLATE.md"
       },
       "id": "read-template",
       "name": "Read Master Template",
-    "type": "n8n-nodes-base.ssh",
+      "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [
         240,
         300
-    ],
-    "credentials": {
-        "ssh": {
-            "id": "YOUR_SSH_CREDENTIAL_ID",
-            "name": "Local Mac SSH"
-        }
-    }
+      ]
     },
     {
       "parameters": {
-        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/1. THE_ARCHIVIST.md\""
+        "fileSelector": "/home/node/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/1. THE_ARCHIVIST.md"
       },
       "id": "read-archivist",
       "name": "Read Archivist Rule",
-    "type": "n8n-nodes-base.ssh",
+      "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [
         460,
         300
-    ],
-    "credentials": {
-        "ssh": {
-            "id": "YOUR_SSH_CREDENTIAL_ID",
-            "name": "Local Mac SSH"
-        }
-    }
+      ]
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Archivist. Keeper of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = $(\"Read Master Template\").first().json.stdout}} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Execute your directive based on the provided Master Template.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Archivist. Keeper of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = Buffer.from($(\"Read Master Template\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n AGENT RULE: {{Buffer.from($(\"Read Archivist Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Execute your directive based on the provided Master Template.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-archivist",
@@ -72,26 +60,20 @@
     },
     {
       "parameters": {
-        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/2. THE_GHOSTWRITER.md\""
+        "fileSelector": "/home/node/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/2. THE_GHOSTWRITER.md"
       },
       "id": "read-ghostwriter",
       "name": "Read Ghostwriter Rule",
-    "type": "n8n-nodes-base.ssh",
+      "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [
         900,
         300
-    ],
-    "credentials": {
-        "ssh": {
-            "id": "YOUR_SSH_CREDENTIAL_ID",
-            "name": "Local Mac SSH"
-        }
-    }
+      ]
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Ghostwriter. Master storyteller.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = $(\"Read Master Template\").first().json.stdout}} \n\n INPUT DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Write the script following your agent rules.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Ghostwriter. Master storyteller.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = Buffer.from($(\"Read Master Template\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n INPUT DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n AGENT RULE: {{Buffer.from($(\"Read Ghostwriter Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Write the script following your agent rules.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-ghostwriter",
@@ -111,26 +93,20 @@
     },
     {
       "parameters": {
-        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/3. THE_VISIONARY.md\""
+        "fileSelector": "/home/node/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/3. THE_VISIONARY.md"
       },
       "id": "read-visionary",
       "name": "Read Visionary Rule",
-    "type": "n8n-nodes-base.ssh",
+      "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [
         1340,
         300
-    ],
-    "credentials": {
-        "ssh": {
-            "id": "YOUR_SSH_CREDENTIAL_ID",
-            "name": "Local Mac SSH"
-        }
-    }
+      ]
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Visionary. Artist of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create visual prompts for the script.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Visionary. Artist of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n AGENT RULE: {{Buffer.from($(\"Read Visionary Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Create visual prompts for the script.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-visionary",
@@ -150,26 +126,20 @@
     },
     {
       "parameters": {
-        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/4. THE_VOICE.md\""
+        "fileSelector": "/home/node/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/4. THE_VOICE.md"
       },
       "id": "read-voice",
       "name": "Read Voice Rule",
-    "type": "n8n-nodes-base.ssh",
+      "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [
         1780,
         300
-    ],
-    "credentials": {
-        "ssh": {
-            "id": "YOUR_SSH_CREDENTIAL_ID",
-            "name": "Local Mac SSH"
-        }
-    }
+      ]
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Voice. Professor of the Ancient.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create the TTS script with phonetic guides.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Voice. Professor of the Ancient.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n AGENT RULE: {{Buffer.from($(\"Read Voice Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Create the TTS script with phonetic guides.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-voice",
@@ -189,26 +159,20 @@
     },
     {
       "parameters": {
-        "command": "cat \"/Users/administrator/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/5. THE_BROADCASTER.md\""
+        "fileSelector": "/home/node/Documents/Live Projects/stcejorp_ty/tonalli_coatl/agents/5. THE_BROADCASTER.md"
       },
       "id": "read-broadcaster",
       "name": "Read Broadcaster Rule",
-    "type": "n8n-nodes-base.ssh",
+      "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [
         2220,
         300
-    ],
-    "credentials": {
-        "ssh": {
-            "id": "YOUR_SSH_CREDENTIAL_ID",
-            "name": "Local Mac SSH"
-        }
-    }
+      ]
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Broadcaster. Metadata expert.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n CONTEXT: {{$script = $(\"Read Master Template\").first().json.stdout}} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create the publishing package.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Broadcaster. Metadata expert.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n CONTEXT: {{$script = Buffer.from($(\"Read Master Template\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n AGENT RULE: {{Buffer.from($(\"Read Broadcaster Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Create the publishing package.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-broadcaster",
