@@ -44,6 +44,8 @@ services:
       - n8n_data:/home/node/.n8n
       # Mount host Documents for native file access
       - /Users/administrator/Documents:/home/node/Documents
+      # Mount project root
+      - /Users/administrator/n8n-local-setup:/home/node/n8n-local-setup
 
     depends_on:
       - postgres

@@ -1,0 +1,113 @@
+{
+  "name": "Parlez-Vous Prodigy - Content Creator",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "start-trigger",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        20,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "series",
+              "value": "Pattern Prodigy"
+            },
+            {
+              "name": "format",
+              "value": "Shorts (1 min)"
+            },
+            {
+              "name": "topic",
+              "value": "Suggest one"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-variables",
+      "name": "Set Variables",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/home/node/n8n-local-setup/docs/n8n/content_creator_template.md"
+      },
+      "id": "read-template",
+      "name": "Read Template",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "export PATH=$PATH:/usr/local/bin && /Users/administrator/.npm-global/bin/gemini 'SYSTEM: You are a content creator. \n\n INPUT VARIABLES: Series={{$(\"Set Variables\").first().json.series}}, Format={{$(\"Set Variables\").first().json.format}}, Topic={{$(\"Set Variables\").first().json.topic}}. \n\n TEMPLATE: {{Buffer.from($(\"Read Template\").first().binary.data.data, \"base64\").toString(\"utf8\")}}' --output-format json",
+        "cwd": "/Users/administrator/n8n-local-setup"
+      },
+      "id": "generate-content",
+      "name": "Generate Content",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        680,
+        300
+      ],
+      "credentials": {
+        "ssh": {
+          "id": "YOUR_SSH_CREDENTIAL_ID",
+          "name": "Local Mac SSH"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Set Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variables": {
+      "main": [
+        [
+          {
+            "node": "Read Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Template": {
+      "main": [
+        [
+          {
+            "node": "Generate Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
