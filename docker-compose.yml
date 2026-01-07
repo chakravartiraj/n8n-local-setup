@@ -42,8 +42,9 @@ services:
     volumes:
       # Data persistence
       - n8n_data:/home/node/.n8n
-      # Optional: Mount local files for custom nodes (uncomment if needed)
-      # - ./custom-nodes:/home/node/.n8n/custom
+      # Mount host Documents for native file access
+      - /Users/administrator/Documents:/home/node/Documents
+
     depends_on:
       - postgres
     networks:
