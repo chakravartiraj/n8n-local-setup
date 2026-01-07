@@ -40,7 +40,7 @@
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Archivist. Keeper of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = Buffer.from($(\"Read Master Template\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n AGENT RULE: {{Buffer.from($(\"Read Archivist Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Execute your directive based on the provided Master Template.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && /Users/administrator/.npm-global/bin/gemini 'SYSTEM: You are The Archivist. Keeper of the Codex. \n\n CONTEXT: {{$script = Buffer.from($(\"Read Master Template\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n AGENT RULE: {{Buffer.from($(\"Read Archivist Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Execute your directive based on the provided Master Template.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-archivist",
@@ -73,7 +73,7 @@
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Ghostwriter. Master storyteller.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = Buffer.from($(\"Read Master Template\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n INPUT DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n AGENT RULE: {{Buffer.from($(\"Read Ghostwriter Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Write the script following your agent rules.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && /Users/administrator/.npm-global/bin/gemini 'SYSTEM: You are The Ghostwriter. Master storyteller. \n\n CONTEXT: {{$script = Buffer.from($(\"Read Master Template\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n INPUT DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n AGENT RULE: {{Buffer.from($(\"Read Ghostwriter Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Write the script following your agent rules.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-ghostwriter",
@@ -106,7 +106,7 @@
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Visionary. Artist of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n AGENT RULE: {{Buffer.from($(\"Read Visionary Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Create visual prompts for the script.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && /Users/administrator/.npm-global/bin/gemini 'SYSTEM: You are The Visionary. Artist of the Codex. \n\n INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n AGENT RULE: {{Buffer.from($(\"Read Visionary Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Create visual prompts for the script.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-visionary",
@@ -139,7 +139,7 @@
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Voice. Professor of the Ancient.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n AGENT RULE: {{Buffer.from($(\"Read Voice Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Create the TTS script with phonetic guides.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && /Users/administrator/.npm-global/bin/gemini 'SYSTEM: You are The Voice. Professor of the Ancient. \n\n INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n AGENT RULE: {{Buffer.from($(\"Read Voice Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Create the TTS script with phonetic guides.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-voice",
@@ -172,7 +172,7 @@
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Broadcaster. Metadata expert.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n CONTEXT: {{$script = Buffer.from($(\"Read Master Template\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n AGENT RULE: {{Buffer.from($(\"Read Broadcaster Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Create the publishing package.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && /Users/administrator/.npm-global/bin/gemini 'SYSTEM: You are The Broadcaster. Metadata expert. \n\n INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n CONTEXT: {{$script = Buffer.from($(\"Read Master Template\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n AGENT RULE: {{Buffer.from($(\"Read Broadcaster Rule\").first().binary.data.data, \"base64\").toString(\"utf8\")}} \n\n TASK: Create the publishing package.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-broadcaster",
