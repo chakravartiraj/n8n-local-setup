@@ -6,7 +6,7 @@
         "command": "export PATH=$PATH:/usr/local/bin && echo \"\" | /Users/administrator/.npm-global/bin/gemini -p \"{{$json.prompt}}\" --output-format json",
         "cwd": "/Users/administrator"
       },
-    "id": "e6f8c7b4-1a2d-4e5f-9c8b-3d4a5e6f7g8h",``
+    "id": "e6f8c7b4-1a2d-4e5f-9c8b-3d4a5e6f7g8h",
       "name": "Execute Gemini CLI",
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
