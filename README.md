@@ -124,3 +124,17 @@ docker compose exec n8n sh
 docker compose down -v
 docker compose up -d
 ```
+
+### If Docker is installed and running! Yet can't run docker commands in terminal
+
+Likely, the docker command is not yet in your system PATH. This is likely because the symlinks failed to create automatically.
+
+Please run these commands to fix it:
+```bash
+sudo ln -s /Applications/Docker.app/Contents/Resources/bin/docker /usr/local/bin/docker
+sudo ln -s /Applications/Docker.app/Contents/Resources/bin/docker-compose /usr/local/bin/docker-compose
+sudo ln -s /Applications/Docker.app/Contents/Resources/bin/docker-credential-desktop /usr/local/bin/docker-credential-desktop
+sudo ln -s /Applications/Docker.app/Contents/Resources/bin/hub-tool /usr/local/bin/hub-tool
+sudo ln -s /Applications/Docker.app/Contents/Resources/bin/com.docker.cli /usr/local/bin/com.docker.cli
+```
+After running these, verifying with docker --version should work. Let me know when you've done this so I can verify and tidy up!
