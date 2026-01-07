@@ -50,7 +50,11 @@ The imported workflow has a placeholder for SSH credentials. You need to configu
 ## Step 4: Test
 
 1.  Click **"Test step"** on the **Execute Gemini CLI** node.
-2.   export PATH=$PATH:/usr/local/bin && /Users/administrator/.npm-global/bin/gemini -p "{{$json.prompt}}" --output-format json
+    *   **Command:**
+        ```bash
+        export PATH=$PATH:/usr/local/bin && echo "You are a helpful assistant." > GEMINI.md && /Users/administrator/.npm-global/bin/gemini '{{$json.prompt}}' --output-format json
+        ```
+    *   **CWD:** `/Users/administrator/gemini-n8n-execution` (Make sure this folder exists!)
 3.  The output will show the response from Gemini.
 
 ## Troubleshooting
@@ -59,4 +63,6 @@ The imported workflow has a placeholder for SSH credentials. You need to configu
 *   **"Permission denied":** Check your username/password.
 *   **"Command not found":** Ensure the path `/Users/administrator/.npm-global/bin/gemini` is correct.
 *   **"env: node: No such file":** This means `node` is not in the SSH PATH. The workflow command includes `export PATH=$PATH:/usr/local/bin`.
+*   **Variable Not Substituting (`{{$json.prompt}}` literal):** Ensure the **Command** field in the n8n node is set to **Expression** mode (toggle the "Fixed/Expression" button or look for the orange variable highlighting). If set to Fixed (String), n8n sends the literal text `{{...}}` to the shell.
 *   **Directory Permissions/EPERM:** macOS often restricts SSH access to `Documents`. The workflow now uses `/Users/administrator/gemini-n8n-execution` as a safe working directory. Ensure this directory exists (`mkdir ~/gemini-n8n-execution`).
+
