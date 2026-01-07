@@ -18,12 +18,18 @@
       },
       "id": "read-template",
       "name": "Read Master Template",
-      "type": "n8n-nodes-base.executeCommand",
+    "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
         240,
         300
-      ]
+    ],
+    "credentials": {
+        "ssh": {
+            "id": "YOUR_SSH_CREDENTIAL_ID",
+            "name": "Local Mac SSH"
+        }
+    }
     },
     {
       "parameters": {
@@ -31,12 +37,18 @@
       },
       "id": "read-archivist",
       "name": "Read Archivist Rule",
-      "type": "n8n-nodes-base.executeCommand",
+    "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
         460,
         300
-      ]
+    ],
+    "credentials": {
+        "ssh": {
+            "id": "YOUR_SSH_CREDENTIAL_ID",
+            "name": "Local Mac SSH"
+        }
+    }
     },
     {
       "parameters": {
@@ -64,12 +76,18 @@
       },
       "id": "read-ghostwriter",
       "name": "Read Ghostwriter Rule",
-      "type": "n8n-nodes-base.executeCommand",
+    "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
         900,
         300
-      ]
+    ],
+    "credentials": {
+        "ssh": {
+            "id": "YOUR_SSH_CREDENTIAL_ID",
+            "name": "Local Mac SSH"
+        }
+    }
     },
     {
       "parameters": {
@@ -97,12 +115,18 @@
       },
       "id": "read-visionary",
       "name": "Read Visionary Rule",
-      "type": "n8n-nodes-base.executeCommand",
+    "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
         1340,
         300
-      ]
+    ],
+    "credentials": {
+        "ssh": {
+            "id": "YOUR_SSH_CREDENTIAL_ID",
+            "name": "Local Mac SSH"
+        }
+    }
     },
     {
       "parameters": {
@@ -130,12 +154,18 @@
       },
       "id": "read-voice",
       "name": "Read Voice Rule",
-      "type": "n8n-nodes-base.executeCommand",
+    "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
         1780,
         300
-      ]
+    ],
+    "credentials": {
+        "ssh": {
+            "id": "YOUR_SSH_CREDENTIAL_ID",
+            "name": "Local Mac SSH"
+        }
+    }
     },
     {
       "parameters": {
@@ -163,12 +193,18 @@
       },
       "id": "read-broadcaster",
       "name": "Read Broadcaster Rule",
-      "type": "n8n-nodes-base.executeCommand",
+    "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
         2220,
         300
-      ]
+    ],
+    "credentials": {
+        "ssh": {
+            "id": "YOUR_SSH_CREDENTIAL_ID",
+            "name": "Local Mac SSH"
+        }
+    }
     },
     {
       "parameters": {
