@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "b3e0402b-a01c-4335-9345-423521362141",
+		"name": "Google Gemini API",
+		"description": "Comprehensive collection for testing Google Gemini models including 2.0 Flash, 1.5 Pro, and 1.5 Flash.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Models",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://generativelanguage.googleapis.com/v1beta/models?key={{GEMINI_API_KEY}}",
+					"protocol": "https",
+					"host": [
+						"generativelanguage",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1beta",
+						"models"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{GEMINI_API_KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gemini 2.0 Flash (Generate Content)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Explain how deep learning works to a 5 year old.\"\n    }]\n  }]\n}"
+				},
+				"url": {
+					"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key={{GEMINI_API_KEY}}",
+					"protocol": "https",
+					"host": [
+						"generativelanguage",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1beta",
+						"models",
+						"gemini-2.0-flash-exp:generateContent"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{GEMINI_API_KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gemini 1.5 Pro (Generate Content)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Write a poem about coding in the moonlight.\"\n    }]\n  }]\n}"
+				},
+				"url": {
+					"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key={{GEMINI_API_KEY}}",
+					"protocol": "https",
+					"host": [
+						"generativelanguage",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1beta",
+						"models",
+						"gemini-1.5-pro:generateContent"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{GEMINI_API_KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gemini 1.5 Flash (Generate Content)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Summarize the benefits of Docker in one sentence.\"\n    }]\n  }]\n}"
+				},
+				"url": {
+					"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={{GEMINI_API_KEY}}",
+					"protocol": "https",
+					"host": [
+						"generativelanguage",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1beta",
+						"models",
+						"gemini-1.5-flash:generateContent"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{GEMINI_API_KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "GEMINI_API_KEY",
+			"value": "YOUR_API_KEY_HERE",
+			"type": "string"
+		}
+	]
+}
