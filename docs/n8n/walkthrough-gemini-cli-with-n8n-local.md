@@ -50,7 +50,7 @@ The imported workflow has a placeholder for SSH credentials. You need to configu
 ## Step 4: Test
 
 1.  Click **"Test step"** on the **Execute Gemini CLI** node.
-2.  It should run the command `/Users/administrator/.npm-global/bin/gemini "..."` on your Mac.
+2.   export PATH=$PATH:/usr/local/bin && /Users/administrator/.npm-global/bin/gemini -p "{{$json.prompt}}" --output-format json
 3.  The output will show the response from Gemini.
 
 ## Troubleshooting
@@ -59,6 +59,6 @@ The imported workflow has a placeholder for SSH credentials. You need to configu
 *   **"Permission denied":** Check your username/password.
 *   **"Command not found":** Ensure the path `/Users/administrator/.npm-global/bin/gemini` is correct.
 *   **"env: node: No such file":** This means `node` is not in the SSH PATH. The workflow command includes `export PATH=$PATH:/usr/local/bin`.
-*   **Execution Hangs/Timeout:** The CLI might be waiting for the API key. Ensure `export GEMINI_API_KEY=...` is part of the command.
+*   **Execution Hangs/Timeout:** The CLI is running in interactive mode. Ensure you are using the `-p` flag (e.g., `gemini -p "prompt"`) to run in non-interactive mode.
 
 
