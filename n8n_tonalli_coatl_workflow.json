@@ -52,7 +52,7 @@
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Archivist. Keeper of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = $(\"read-template\").first().json.stdout}} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Execute your directive based on the provided Master Template.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Archivist. Keeper of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = $(\"Read Master Template\").first().json.stdout}} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Execute your directive based on the provided Master Template.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-archivist",
@@ -91,7 +91,7 @@
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Ghostwriter. Master storyteller.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = $(\"read-template\").first().json.stdout}} \n\n INPUT DIRECTIVE: {{ $(\"agent-archivist\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Write the script following your agent rules.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Ghostwriter. Master storyteller.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'CONTEXT: {{$script = $(\"Read Master Template\").first().json.stdout}} \n\n INPUT DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Write the script following your agent rules.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-ghostwriter",
@@ -130,7 +130,7 @@
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Visionary. Artist of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"agent-ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"agent-archivist\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create visual prompts for the script.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Visionary. Artist of the Codex.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create visual prompts for the script.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-visionary",
@@ -169,7 +169,7 @@
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Voice. Professor of the Ancient.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"agent-ghostwriter\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create the TTS script with phonetic guides.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Voice. Professor of the Ancient.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create the TTS script with phonetic guides.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-voice",
@@ -208,7 +208,7 @@
     },
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Broadcaster. Metadata expert.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"agent-ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"agent-archivist\").first().json.response }} \n\n CONTEXT: {{$script = $(\"read-template\").first().json.stdout}} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create the publishing package.' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are The Broadcaster. Metadata expert.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini 'INPUT SCRIPT: {{ $(\"Step 2: The Ghostwriter\").first().json.response }} \n\n ARCHIVIST DIRECTIVE: {{ $(\"Step 1: The Archivist\").first().json.response }} \n\n CONTEXT: {{$script = $(\"Read Master Template\").first().json.stdout}} \n\n AGENT RULE: {{$json.stdout}} \n\n TASK: Create the publishing package.' --output-format json",
         "cwd": "/Users/administrator/n8n-local-setup"
       },
       "id": "agent-broadcaster",
