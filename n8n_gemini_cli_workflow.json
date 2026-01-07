@@ -3,8 +3,8 @@
   "nodes": [
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo 'DEBUG_PROMPT: {{$json.prompt}}' > /Users/administrator/gemini-n8n-execution/debug_last_prompt.txt && /Users/administrator/.npm-global/bin/gemini '{{$json.prompt}}' --output-format json",
-        "cwd": "/Users/administrator/gemini-n8n-execution"
+        "command": "export PATH=$PATH:/usr/local/bin && echo 'DEBUG_PROMPT: {{$json.prompt}}' > /Users/administrator/n8n-local-setup/debug_last_prompt.txt && /Users/administrator/.npm-global/bin/gemini '{{$json.prompt}}' --output-format json",
+        "cwd": "/Users/administrator/n8n-local-setup"
       },
     "id": "e6f8c7b4-1a2d-4e5f-9c8b-3d4a5e6f7g8h",
       "name": "Execute Gemini CLI",

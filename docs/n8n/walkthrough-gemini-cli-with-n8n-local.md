@@ -54,7 +54,7 @@ The imported workflow has a placeholder for SSH credentials. You need to configu
         ```bash
         export PATH=$PATH:/usr/local/bin && echo "You are a helpful assistant." > GEMINI.md && /Users/administrator/.npm-global/bin/gemini '{{$json.prompt}}' --output-format json
         ```
-    *   **CWD:** `/Users/administrator/gemini-n8n-execution` (Make sure this folder exists!)
+    *   **CWD:** `/Users/administrator/n8n-local-setup` (Make sure this folder exists!)
 3.  The output will show the response from Gemini.
 
 ## Troubleshooting
@@ -64,5 +64,5 @@ The imported workflow has a placeholder for SSH credentials. You need to configu
 *   **"Command not found":** Ensure the path `/Users/administrator/.npm-global/bin/gemini` is correct.
 *   **"env: node: No such file":** This means `node` is not in the SSH PATH. The workflow command includes `export PATH=$PATH:/usr/local/bin`.
 *   **Variable Not Substituting (`{{$json.prompt}}` literal):** Ensure the **Command** field in the n8n node is set to **Expression** mode (toggle the "Fixed/Expression" button or look for the orange variable highlighting). If set to Fixed (String), n8n sends the literal text `{{...}}` to the shell.
-*   **Directory Permissions/EPERM:** macOS often restricts SSH access to `Documents`. The workflow now uses `/Users/administrator/gemini-n8n-execution` as a safe working directory. Ensure this directory exists (`mkdir ~/gemini-n8n-execution`).
+*   **Directory Permissions/EPERM:** macOS often restricts SSH access to `Documents`. The workflow now uses `/Users/administrator/n8n-local-setup` as a safe working directory. Ensure this directory exists (`mkdir ~/n8n-local-setup`).
 
