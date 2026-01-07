@@ -59,6 +59,6 @@ The imported workflow has a placeholder for SSH credentials. You need to configu
 *   **"Permission denied":** Check your username/password.
 *   **"Command not found":** Ensure the path `/Users/administrator/.npm-global/bin/gemini` is correct.
 *   **"env: node: No such file":** This means `node` is not in the SSH PATH. The workflow command includes `export PATH=$PATH:/usr/local/bin`.
-*   **Execution Hangs/Timeout:** The CLI might be waiting for input. Use `echo "" | gemini -p ...` to force closing the input stream, or ensure you are using the `-p` flag.
+*   **Directory Mismatch/Agent Error:** The CLI is sensitive to where it is run. Ensure the `cwd` parameter in the node is set to your project root (e.g., `/Users/administrator/Documents/Live Projects/n8n-local-setup`) matches the open project.
 
 
