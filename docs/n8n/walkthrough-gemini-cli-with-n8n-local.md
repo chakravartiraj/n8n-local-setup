@@ -52,7 +52,7 @@ The imported workflow has a placeholder for SSH credentials. You need to configu
 1.  Click **"Test step"** on the **Execute Gemini CLI** node.
     *   **Command:**
         ```bash
-        export PATH=$PATH:/usr/local/bin && echo "You are a helpful assistant." > GEMINI.md && /Users/administrator/.npm-global/bin/gemini '{{$json.prompt}}' --output-format json
+        export PATH=$PATH:/usr/local/bin && /Users/administrator/.npm-global/bin/gemini 'SYSTEM: You are a helpful assistant. \n\n {{$json.prompt}}' --output-format json
         ```
     *   **CWD:** `/Users/administrator/n8n-local-setup` (Make sure this folder exists!)
 3.  The output will show the response from Gemini.
