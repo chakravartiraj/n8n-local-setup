@@ -3,7 +3,7 @@
   "nodes": [
     {
       "parameters": {
-        "command": "export PATH=$PATH:/usr/local/bin && echo \"You are a helpful assistant.\" > GEMINI.md && /Users/administrator/.npm-global/bin/gemini '{{$json.prompt}}' --output-format json",
+        "command": "export PATH=$PATH:/usr/local/bin && /Users/administrator/.npm-global/bin/gemini '{{$json.prompt}}' --output-format json",
         "cwd": "/Users/administrator/gemini-n8n-execution"
       },
     "id": "e6f8c7b4-1a2d-4e5f-9c8b-3d4a5e6f7g8h",
@@ -53,7 +53,7 @@
           "string": [
             {
               "name": "prompt",
-              "value": "Hello from n8n! Tell me a joke."
+            "value": "Tell me a joke."
             }
           ]
         },
