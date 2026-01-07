@@ -57,4 +57,6 @@ The imported workflow has a placeholder for SSH credentials. You need to configu
 
 *   **"Connection refused":** Ensure "Remote Login" is actually enabled.
 *   **"Permission denied":** Check your username/password.
-*   **"Command not found":** Ensure the path `/Users/administrator/.npm-global/bin/gemini` is correct. You can verify this by running `which gemini` in your terminal.
+*   **"Command not found":** Ensure the path `/Users/administrator/.npm-global/bin/gemini` is correct.
+*   **"env: node: No such file":** This means `node` is not in the SSH PATH. The workflow command has been updated to include `export PATH=$PATH:/usr/local/bin`.
+
